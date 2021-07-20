@@ -3,9 +3,10 @@ from rest_framework import generics
 from .models import Cliente
 from .serializers import ClienteSerializer, ClientePostSerializer, ClientePutSerializer
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 from authorization.authentication import ExpiringTokenAuthentication
 from authorization.mispermisos import Permiso
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.response import Response
 from rest_framework import status
 # Create your views here.
@@ -19,7 +20,8 @@ class ClienteList(generics.ListAPIView):
         return queryset
 
 @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
+@authentication_classes([TokenAuthentication])
 def list_clientes(request):
 
     if (not Permiso.is_valid(request.user, 'clientes.view_cliente')):

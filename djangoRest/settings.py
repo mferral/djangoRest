@@ -79,12 +79,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'djangoRest.wsgi.application'
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'authorization.authentication.ExpiringTokenAuthentication',
-    ],    
     # 'DEFAULT_AUTHENTICATION_CLASSES': [
-    #     'rest_framework.authentication.TokenAuthentication',        
+    #     'authorization.authentication.ExpiringTokenAuthentication',
     # ],    
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',        
+    ],    
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
