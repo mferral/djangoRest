@@ -18,4 +18,4 @@ class ClientePutSerializer(serializers.ModelSerializer):
         model = Cliente
         fields = '__all__'
         # read_only_fields = ('nombre', )
-        fields = ['nombre', 'apellido', 'foto']
+        fields = ['nombre', 'foto']

@@ -21,9 +21,8 @@ class ClienteList(generics.ListAPIView):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-@authentication_classes([TokenAuthentication])
+@authentication_classes([ExpiringTokenAuthentication])
 def list_clientes(request):
-
     if (not Permiso.is_valid(request.user, 'clientes.view_cliente')):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -32,7 +31,7 @@ def list_clientes(request):
     return Response(serializer.data)
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def create_cliente(request):
     serializer = ClientePostSerializer(data = request.data)
     if serializer.is_valid():
