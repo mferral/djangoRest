@@ -13,9 +13,12 @@ from rest_framework import status
 
 class ClienteList(generics.ListAPIView):
     pagination_class = None
+    permission_classes = []
+    authentication_classes = []
     serializer_class = ClienteSerializer
 
     def get_queryset(self):        
+        print ('Listado')
         queryset = Cliente.objects.all()
         return queryset
 

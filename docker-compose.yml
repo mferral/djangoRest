@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  django-db:
+    image: mysql:8.0
+    container_name: django-db
+    volumes:
+      - "./data:/var/lib/mysql"
+    restart: unless-stopped
+    ports:
+      - 3320:3306
+    command: --max_allowed_packet=32505856
+    environment:
+      MYSQL_DATABASE: mydjangodb
+      MYSQL_ROOT_PASSWORD: djangopassword
+      TZ: America/Monterrey
+  django-rest:
+    build: .
+    container_name: django-api
+    volumes:
+      - .:/app      
+    restart: unless-stopped
+    command: "python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8006:8000"
+    depends_on:
+       - django-db
